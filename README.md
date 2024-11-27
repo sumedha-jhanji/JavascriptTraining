@@ -19,11 +19,11 @@
 **Note:** After all Javascript gets over then glocal execution context will also gets deleted.
 
 - The whole processing of execution context is maintained on stack called CALL STACK. Also know as    
- - Control stack
- - Execution context stack
- - Program stack
- - Runtime stack
- - Machine Stack
+    - Control stack
+    - Execution context stack
+    - Program stack
+    - Runtime stack
+    - Machine Stack
 
 ## Hoisting in Javascript
 - Hoisting means, we can acess variables and function in javscript before initializing or defining it with out any error.
@@ -82,13 +82,13 @@ console.log(x); // glocal execution context
 
 ## Window object and this keyword
 - when ever we run a javscript, Javascript engine (JE) creates 
- - global execution context (GEC)
- - gloabl object called WINDOW (global space)
- - this keyword which is equivalent to WINDOW in gloabl space
+    - global execution context (GEC)
+    - gloabl object called WINDOW (global space)
+    - this keyword which is equivalent to WINDOW in gloabl space
 - any variable or function defined in global space can be accessd using 
- - window.variable  OR window.function
- - variable OR function
- - this.variable OR this.function
+    - window.variable  OR window.function
+    - variable OR function
+    - this.variable OR this.function
 - even for a blank javascript file, JE creates above 3 - GEC, window, this
 
 ## Undefined
@@ -96,20 +96,20 @@ console.log(x); // glocal execution context
 
 ## Scope and Lexical Environment
 - Lexical Environment
- - lexical means hirerachy.
- - Whenever an execution context is created, a lexical environment is created. Lexical environment is the local memory along with the lexical environment of its parent. Lexical as a term means in hierarchy or in sequence.
- - Having the reference of parent's lexical environment means, the child or the local function can access all the variables and functions defined in the memory space of its lexical parent.  
- - example
- ```js
- function a(){
-     var d = 100;
+- lexical means hirerachy.
+- Whenever an execution context is created, a lexical environment is created. Lexical environment is the local memory along with the lexical environment of its parent. Lexical as a term means in hierarchy or in sequence.
+- Having the reference of parent's lexical environment means, the child or the local function can access all the variables and functions defined in the memory space of its lexical parent.  
+- example
+```js
+function a(){
+ var d = 100;
+ console.log(b); // will print 10
+ function c(){
      console.log(b); // will print 10
-     function c(){
-         console.log(b); // will print 10
-         console.log(d);// will print 100
-     }
-     c();
+     console.log(d);// will print 100
  }
+ c();
+}
 
  var b = 10;
  a();
@@ -118,7 +118,7 @@ console.log(x); // glocal execution context
 **Explanation**
 - GEC -> memmory (b, a + lexical environment of parent which is null);
 - execution context of a() -> memory(d, c + lexical environment of GEC)
--  execution context of c() -> memory(lexical environment of a())
+- execution context of c() -> memory(lexical environment of a())
 - the JS engine first searches for a variable in the current local memory space, if its not found here it searches for the variable in the lexical environment of its parent, and if its still not found, then it searches that variable in the subsequent lexical environments, and the sequence goes on until the variable is found in some lexical environment or the lexical environment becomes NULL.
 
 ## Scope
@@ -152,7 +152,7 @@ b=1000; // not possible // TypeError.
 
 ## Temporal dead zone
 - time between let varizble was hoisted till time it was assigned value.
--  variables in this zoen cannot be accessed.
+- variables in this zoen cannot be accessed.
 - once variable is assigned value, then they come out of this zone.
 
 ## Reference Error
@@ -257,7 +257,7 @@ hello will be printed first
 ```
 ## setTimeOut()
 - calls a function after a number of milliseconds
--executed only once
+- executed only once
 - Use the clearTimeout() method to prevent the function from starting.
 - To clear a timeout, use the id returned from setTimeout():
 ```js
@@ -307,24 +307,24 @@ rather than
 - this is because call back function is closure -> it contains reference of i variable due to lexical environment.
 - when setTimeout will run, i's value is 6.
 - To resolve this         
- - First approach
-  - use "let" in place of "var" in for loop as let has block scope.
-  - so everytime the settimeout is used in loop, it gets new copy of "i" variable in closure.
-  ```js
-  function x(){
-      for(let i=1; i<=5; i++)
-      {
-          setTimeout(function(){
-          console.log(i);
-          }, i*1000)
-      }
-      console.log("Hello");
-      }
-      x();
-  ```
- - Second approach
-  ```js
-   function x(){
+    - First approach
+      - use "let" in place of "var" in for loop as let has block scope.
+      - so everytime the settimeout is used in loop, it gets new copy of "i" variable in closure.
+      ```js
+      function x(){
+          for(let i=1; i<=5; i++)
+          {
+              setTimeout(function(){
+              console.log(i);
+              }, i*1000)
+          }
+          console.log("Hello");
+          }
+          x();
+      ```
+    - Second approach
+    ```js
+    function x(){
      for(var  i=1; i<=5; i++)
      {
          function close(x){ // form a closure, here it will get new copy of i every time,
@@ -337,7 +337,7 @@ rather than
      console.log("Hello");
      }
      x();
-  ```
+    ```
 
 ## Examples of closure
 ```js
