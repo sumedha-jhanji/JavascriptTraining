@@ -5,17 +5,17 @@
 ## How it works
 - works in ExcutionContext -> firstly a glocal execution context will be created on call stack at lower end.
 - **Execution context** consist of 2 component
- - Memory/Varaible Environment -> where each variable or function is stored as key value pair
- - Thread of Execution/Code Block -> where each statement of code is executed in sequential manner.    
+    - Memory/Varaible Environment -> where each variable or function is stored as key value pair
+     - Thread of Execution/Code Block -> where each statement of code is executed in sequential manner.    
 - Execution context is created in 2 phases
- - Ist Phase - Creation
-   - Memory creation phase 
-    - allocate all memory to variables and functions.
-       for all variables it assigns "UNDEFINED" (Placeholder for actual value), for functions, it will assign whole function code to it.
- - 2nd Phase - Code Execution phase 
-  - excutes each line of code one by one
-  - if there is value assignment to variable, it will assign that value in memory block in place of undefined. i.e. replaces undefined with value in phase 1 part.
-  - If we invoke any function -> a new Execution Context will be created inside global execution context. Once it is done, the local execution context will get deleted.
+    - Ist Phase - Creation
+       - Memory creation phase 
+            - allocate all memory to variables and functions.
+        - for all variables it assigns "UNDEFINED" (Placeholder for actual value), for functions, it will assign whole function code to it.
+     - 2nd Phase - Code Execution phase 
+      - excutes each line of code one by one
+      - if there is value assignment to variable, it will assign that value in memory block in place of undefined. i.e. replaces undefined with value in phase 1 part.
+      - If we invoke any function -> a new Execution Context will be created inside global execution context. Once it is done, the local execution context will get deleted.
 **Note:** After all Javascript gets over then glocal execution context will also gets deleted.
 
 - The whole processing of execution context is maintained on stack called CALL STACK. Also know as    
