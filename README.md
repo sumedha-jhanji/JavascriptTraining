@@ -506,12 +506,12 @@ attachEventListener();
 - so if we have any task that needs wait etc we cannot do that as Javascript doesn't have timer.
 - So brower provides various of its capabilities via a Global object know as WINDOW to GEC inside JE.
 - These capabilities are WebAPIs
- - fetch()
- - setTimeOut()
- - local storage
- - console
- - DOM API (document.*)
- - location
+    - fetch()
+    - setTimeOut()
+    - local storage
+    - console
+    - DOM API (document.*)
+    - location
 
 ## EVENT LOOP
 - say we have setTimeout() method called in javascript code which has timer of 5 seconds
@@ -519,11 +519,11 @@ attachEventListener();
 - once the timer gets expired, it needs to come into call stack. 
 - for that we need Callback queue and event loop
 - Event Loop 
- - acts like a gatekeeper and checks if call stack is empty and there is any thing in call back queue. If yes, then pop in the call back method from queue into calls stack.
+    - acts like a gatekeeper and checks if call stack is empty and there is any thing in call back queue. If yes, then pop in the call back method from queue into calls stack.
 - Callback queue    
- - when the timer for settimeout() expires, it will put the registered call back function into call back queue from where event loop will popin the same into call stack
- - call stack will quickly executes that function
- - similar things will happen with addEventListerner
+    - when the timer for settimeout() expires, it will put the registered call back function into call back queue from where event loop will popin the same into call stack
+    - call stack will quickly executes that function
+    - similar things will happen with addEventListerner
 
 ## How fetch() works in this case
 - Event Loop keeps on checking the call stack in JE.
@@ -552,16 +552,16 @@ console.log("End");
 ```
 
 - how it will get executed
- - logs start
- - register setTimeout in browser webapi and attach timer of 5000 seconds
- - register fetch in WebApi.
- - log end.
- - now say fetch has received a response and timer also expires.
-  - it will place cbF() in MicroTask Queue
-  - place cbt() in Callback queue
- - event loop will continuosly monitor csllstack in JE
- - once is is cleared, it will first pop cbf() into call stack 
- - once that is done, it will pop cbt() into call stack.
+    - logs start
+    - register setTimeout in browser webapi and attach timer of 5000 seconds
+    - register fetch in WebApi.
+    - log end.
+    - now say fetch has received a response and timer also expires.
+      - it will place cbF() in MicroTask Queue
+      - place cbt() in Callback queue
+     - event loop will continuosly monitor csllstack in JE
+     - once is is cleared, it will first pop cbf() into call stack 
+     - once that is done, it will pop cbt() into call stack.
 
 ## Higher Order functions
 - a function which takes other function as argument or return another function is called higher order function
@@ -569,47 +569,48 @@ console.log("End");
 - calculateParameters is a higher order function 
 - we have created small reusable components, implementing modularity.
 - area is a call back function
-- MAP() is javscript given higher order function 
- - maps the things passed. 
-    It iterates on each element and returns the output
-```js
-const radius =[3,1,3,4];
-
-const area = function(radius){
-    return Math.PI * radius * radius;
-}
-
-const circumfernce = function(radius){
-    return 2 * Math.PI * radius;
-}
-
-const diameter = function(radius){
-    return 2 * radius;
-}
-
-const calculateParameters = function(radius, logic){ // created generic function, thus reducing code repititions following DRY(donot repeat yourself) principle
-    const output =[];
-    for(let i =0; i < radius.length; i++){
-        output.push(logic(radius[i]));
+- MAP() is javscript given higher order function
+    - maps the things passed. 
+    - It iterates on each element and returns the output
+    ```js
+    const radius =[3,1,3,4];
+    
+    const area = function(radius){
+        return Math.PI * radius * radius;
     }
-    return output;
-}
-
-console.log(calculateParameters(radius, area));
-
-console.log(calculateParameters(radius, circumfernce));
-
-console.log(calculateParameters(radius, diameter));
-```
-- if we want to use calculateParameters as radius.calculateParameters(area) --- we can define calculateParameters as belew:
-```js
-Array.prototype.calculateParameters = function(logic){ //now calculate will attach to all the arrays, radius will get attached to function via a this
-    const output =[];
-    for(let i =0; i < this.length; i++){
-        output.push(logic(this[i]));
+    
+    const circumfernce = function(radius){
+        return 2 * Math.PI * radius;
     }
-    return output;
-}
+    
+    const diameter = function(radius){
+        return 2 * radius;
+    }
+    
+    const calculateParameters = function(radius, logic){ // created generic function, thus reducing code repititions following DRY(donot repeat yourself) principle
+        const output =[];
+        for(let i =0; i < radius.length; i++){
+            output.push(logic(radius[i]));
+        }
+        return output;
+    }
+    
+    console.log(calculateParameters(radius, area));
+    
+    console.log(calculateParameters(radius, circumfernce));
+    
+    console.log(calculateParameters(radius, diameter));
+    ```
+    
+    - if we want to use calculateParameters as radius.calculateParameters(area) --- we can define calculateParameters as belew:
+    ```js
+    Array.prototype.calculateParameters = function(logic){ //now calculate will attach to all the arrays, radius will get attached to function via a this
+        const output =[];
+        for(let i =0; i < this.length; i++){
+            output.push(logic(this[i]));
+        }
+        return output;
+    }
 ```
         
 ## map()
@@ -642,9 +643,9 @@ Array.prototype.calculateParameters = function(logic){ //now calculate will atta
 - it builds a trust and confirms that callback will get called and that too only one time.
 - promise object is immutable, resolved just once.
 - it can just have 3 states 
- - pending
- - fullfilled
- - rejected.
+    - pending
+    - fullfilled
+    - rejected.
 
 - Promise is an object representing eventaul completion or failure of an async operation.
 
@@ -656,8 +657,8 @@ createOrder(cart).then(callback function()).then(callback function());
         
 ## How to create our own promise, handle errors.
 - We use Promise constructor which takes a function with 2 paratmeters
- - resolve
- - rejected
+    - resolve
+    - rejected
     
 - resolve and reject are 2 methods that are given by javascript to create a promise
 ```js
@@ -688,41 +689,41 @@ const prresult = functioname(parameters).then(//logic);
 - used when we are making parallel calls.
 
 - Promise.all()
- - when we are making multiple api calls and we want the results from all the apis
- - it takes iterable object of promises as contract(parameter).
- - it will wait for all prmises in iterable object to settled (resolve/rejeted) and will return result in itreable object 
- - In case, any of the promise will get rejected, promise.all() will return an error AS SOON as error happened. It won't wait for all other promises to complete. Rest api's will continue.
+    - when we are making multiple api calls and we want the results from all the apis
+    - it takes iterable object of promises as contract(parameter).
+    - it will wait for all prmises in iterable object to settled (resolve/rejeted) and will return result in itreable object 
+    - In case, any of the promise will get rejected, promise.all() will return an error AS SOON as error happened. It won't wait for all other promises to complete. Rest api's will continue.
 
 - Promise.allSettled()
- - either sucess or failure, it will wait for all promsies to get settled and then will return an array of object.
+    - either sucess or failure, it will wait for all promsies to get settled and then will return an array of object.
 
 - Promise.race()
- - it will return first settled array irrespective of whether it is resolved or rejected.
+    - it will return first settled array irrespective of whether it is resolved or rejected.
 
 - Promise.any()
- - it will retur first successfully settled promise result. 
- - if all will get fail, it will return aggregate error with all errors as an array of objects.
+    - it will retur first successfully settled promise result. 
+    - if all will get fail, it will return aggregate error with all errors as an array of objects.
 
 ## THIS keyword
 - in global object it is WINDOW Object
 - In Functions  
- - if it is non srict mode, it is WINDOW Object
- - if it is strict mode 
-  - if called directly as methodname() ->  it is UNDEFINED. (because of "this substitution" -> if value of this keyword is undefined or null, then it will be replaced with global object.) 
-  - if called as window.methodname() -> it will be window
+    - if it is non srict mode, it is WINDOW Object
+    - if it is strict mode 
+      - if called directly as methodname() ->  it is UNDEFINED. (because of "this substitution" -> if value of this keyword is undefined or null, then it will be replaced with global object.) 
+      - if called as window.methodname() -> it will be window
 - Inside object's method
- - it will be object reference
+    - it will be object reference
 - call(), apply(), bind ()
- - these methods are used to share the data between objects. Basically we are overiding the value of "this" using these methods.
- - example -say we have an object with method print(). we have another object. Now we want to call the print() of first object. we can do that by using obj1.print.call(obj2);        
- 
- - call() -> borrow function into an object
- - apply() -> same as above. Difference is if we need to pass arguments, we need to pass them as list of arguments in case of "apply()";
- - bind() -> calling is similar to call() but it will return a copy of function binded and we can then call that function later as needed.
+    - these methods are used to share the data between objects. Basically we are overiding the value of "this" using these methods.
+    - example -say we have an object with method print(). we have another object. Now we want to call the print() of first object. we can do that by using obj1.print.call(obj2);        
+    
+    - call() -> borrow function into an object
+    - apply() -> same as above. Difference is if we need to pass arguments, we need to pass them as list of arguments in case of "apply()";
+    - bind() -> calling is similar to call() but it will return a copy of function binded and we can then call that function later as needed.
 
 - inside arrow functions
- - they don't have "this" binding associated with it
- - they provide value of enclosing lexical context.
+    - they don't have "this" binding associated with it
+    - they provide value of enclosing lexical context.
 - inside DOM
- - referencing html element's reference like if we have used "this" in button, then it will give reference of "HTML button"
+    - referencing html element's reference like if we have used "this" in button, then it will give reference of "HTML button"
 
