@@ -236,7 +236,7 @@ test(); // will print 10 value of a as it will remeber its lexical scope  (conta
 - consumes lot of memory, memory leaks if not handles properly
 - variables are not Garbage collected till program expires
 
-## setTimeout + Closure
+## setTimeout() + Closure
 - Javascript doesn't run the setTimeout at the place where it is written.
 - it takes the setTimeout callback function(which is a closure) , attaches the time specified and then whne time reaches, it calls that function.
 - Meanwhile it will continue with the next line execution as Javascript doesn't wait for ant one.
@@ -484,7 +484,7 @@ d();
 setTimeout(function(){}, 5000) // first parameter is callback function. It is also example of closure too.
 ```
         
-# Closures + Callback functions + Event Listeners example
+## Closures + Callback functions + Event Listeners example
 ```js
 function attachEventListener(){ 
     let count = 0;
